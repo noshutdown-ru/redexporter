@@ -1,0 +1,19 @@
+# English strings go here for Rails i18n
+en:
+  redexporter_label: "Redexporter"
+  redexporter:
+    settings:
+      title:
+          enabled: "Enable metrics:"
+          token: "Auth token:"
+          metrics: "Metrics:"
+          example: "Prometheus config example:"
+      description:
+          enabled: "Check if you want expose metrics."
+          token: "Required for authorization."
+          metrics: "Link on metrics for prometheus."
+      button:
+          update: "New token"
+      error:
+          disabled: "Metrics is disabled, open plugin settings for enable it."
+          unauthorised: "Token not match"

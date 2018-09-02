@@ -1,0 +1,76 @@
+<div id="settings">
+  <%= form_tag({:action => :save}) do %>
+    <div class="box tabular settings">
+
+          <p>
+            <label><%= t('redexporter.settings.title.enabled') %></label>
+            <%= check_box_tag('settings[redexporter_enabled]',
+                              Setting.plugin_redexporter['redexporter_enabled'],
+                              Setting.plugin_redexporter['redexporter_enabled'])
+
+            %>
+            <em class="info"><%= t('redexporter.settings.description.enabled') %></em>
+          </p>
+          <p>
+            <label><%= t('redexporter.settings.title.token') %></label>
+            <input type="text"
+                   size="33"
+                   id="settings_redexporter_prometheus_tokent"
+                   value="<%= Setting.plugin_redexporter['redexporter_prometheus_token'] %>"
+                   name="settings[redexporter_prometheus_token]"
+            >
+            <%= button_tag t('redexporter.settings.button.update'),
+                           :id => "redexporter_get_new_token",
+                           :type => "button"
+            %>
+            <em class="info"><%= t('redexporter.settings.description.token') %></em>
+          </p>
+          <p>
+            <label><%= t('redexporter.settings.title.metrics') %></label>
+            <%= link_to nil, {
+                :host => request.base_url,
+                :controller => 'redexporter',
+                :action => 'metrics',
+                :token => Setting.plugin_redexporter['redexporter_prometheus_token']}
+            %>
+            <em class="info"><%= t('redexporter.settings.description.metrics') %></em>
+          </p>
+    </div>
+    <div class="box tabular settings">
+      <p>
+        <label><%= t('redexporter.settings.title.example') %></label>
+<pre>
+- job_name: redmine
+  scrape_interval: 60s
+  scheme: <%= request.protocol.delete! '://' %>
+  metrics_path: '/redexporter/metrics'
+  params:
+    token: ['<%=Setting.plugin_redexporter['redexporter_prometheus_token'] %>']
+  static_configs:
+  - targets: ['<%= request.host %>']
+</pre>
+      </p>
+    </div>
+
+    <%= submit_tag l(:button_apply) %>
+  <% end %>
+</div>
+
+<script>
+    function randomString() {
+      var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+      var string_length = 32;
+      var randomstring = '';
+      for (var i=0; i<string_length; i++) {
+          var rnum = Math.floor(Math.random() * chars.length);
+          randomstring += chars.substring(rnum,rnum+1);
+      }
+      return randomstring
+    }
+
+    $(document).ready(function(){
+        $('#redexporter_get_new_token').click(function () {
+            $("#settings_redexporter_prometheus_tokent").val(randomString());
+        });
+    })
+</script>
