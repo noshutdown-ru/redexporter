@@ -80,8 +80,8 @@ https://noshutdown.ru/en/redmine-plugins-redexporter/#about
 
 ## Screenshots
 
-https://noshutdown.ru/en/redmine-plugins-ttm/#screens
+https://noshutdown.ru/en/redmine-plugins-redexporter/#screens
 
 ## Releases info
 
-https://noshutdown.ru/en/redmine-plugins-ttm/#releases
+https://noshutdown.ru/en/redmine-plugins-redexporter/#releases
