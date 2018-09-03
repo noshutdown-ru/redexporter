@@ -6,7 +6,7 @@ module RedExporter::Redmine
     begin
       data.observe User.count - 1
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end
@@ -17,7 +17,7 @@ module RedExporter::Redmine
     begin
       data.observe User.where("last_login_on < ?", 5.seconds.ago).count - 1
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end
@@ -29,7 +29,7 @@ module RedExporter::Redmine
       Dir.glob(File.join("#{Rails.root}/files", '**', '*')) { |file| size+=File.size(file) }
       data.observe size
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end
@@ -39,7 +39,7 @@ module RedExporter::Redmine
     begin
       data.observe Issue.count
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end
@@ -49,7 +49,7 @@ module RedExporter::Redmine
     begin
       data.observe Issue.where(status:"closed").count
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end

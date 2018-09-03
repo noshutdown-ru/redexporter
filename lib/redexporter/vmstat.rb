@@ -7,7 +7,7 @@ module RedExporter::Vmstat
     begin
       data.observe Vmstat.snapshot.load_average.one_minute
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end
@@ -18,7 +18,7 @@ module RedExporter::Vmstat
     begin
       data.observe Vmstat.snapshot.disks[0].total_bytes
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end
@@ -29,7 +29,7 @@ module RedExporter::Vmstat
     begin
       data.observe Vmstat.snapshot.disks[0].used_bytes
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end
@@ -39,9 +39,9 @@ module RedExporter::Vmstat
     data = PrometheusExporter::Metric::Gauge.new('disk_free_bytes', 'Calculates the number of free bytes for the file system.')
 
     begin
-      data.observe Vmstat.snapshot.disks[10050].free_bytes
+      data.observe Vmstat.snapshot.disks[0].free_bytes
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end
@@ -66,7 +66,7 @@ module RedExporter::Vmstat
 
       data.observe cpu_usage_precent
     rescue
-      data.observe "error"
+      data.observe 0
     end
     data.to_prometheus_text
   end

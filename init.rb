@@ -13,7 +13,7 @@ Redmine::Plugin.register :redexporter do
   name 'Redexporter plugin'
   author 'noshutdown.ru'
   description 'Allows you expose Redmine metrics to Prometheus'
-  version '0.0.1'
+  version '0.0.2'
   url 'https://noshutdown.ru/redmine-plugins-redexporter/'
   author_url 'https://noshutdown.ru/'
 
