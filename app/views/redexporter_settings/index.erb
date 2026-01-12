@@ -42,7 +42,7 @@
 <pre>
 - job_name: redmine
   scrape_interval: 60s
-  scheme: <%= request.protocol.delete! '://' %>
+  scheme: <%= request.protocol.delete(':/') %>
   metrics_path: '/redexporter/metrics'
   params:
     token: ['<%=Setting.plugin_redexporter['redexporter_prometheus_token'] %>']
