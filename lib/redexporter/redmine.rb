@@ -47,7 +47,7 @@ module RedExporter::Redmine
   def self.redmine_closed_issues_count()
     data = PrometheusExporter::Metric::Gauge.new('redmine_closed_issues_count', 'Count of all closed issues')
     begin
-      data.observe Issue.where(status:"closed").count
+      data.observe Issue.joins(:status).where('issue_statuses.is_closed = ?', true).count
     rescue
       data.observe 0
     end

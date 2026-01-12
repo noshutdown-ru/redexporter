@@ -1,20 +1,17 @@
-require 'redexporter_admin_menu_hooks'
-#require 'application_controller_patch'
+require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter_admin_menu_hooks"
+require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/redexporter"
+require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/vmstat"
+require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/redmine"
+require_dependency "#{Rails.root}/plugins/redexporter/lib/application_controller_patch"
 
-require 'redexporter/redexporter'
-require 'redexporter/vmstat'
-require 'redexporter/redmine'
-
-#Rails.configuration.to_prepare do
-#  ApplicationController.send(:include, ApplicationControllerPatch) unless Issue.included_modules.include? ApplicationControllerPatch
-#end
+ApplicationController.include ApplicationControllerPatch
 
 Redmine::Plugin.register :redexporter do
   name 'Redexporter plugin'
   author 'noshutdown.ru'
   description 'Allows you expose Redmine metrics to Prometheus'
-  version '0.0.2'
-  url 'https://noshutdown.ru/redmine-plugins-redexporter/'
+  version '1.0.0'
+  url 'https://github.com/noshutdown-ru/redexporter'
   author_url 'https://noshutdown.ru/'
 
   settings :default => {'empty' => true}, :partial => 'settings/redexporter_settings'
