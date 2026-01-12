@@ -1,16 +1,5 @@
 
 module RedExporter::Redmine
-  def self.user_count()
-    data = PrometheusExporter::Metric::Gauge.new('redmine_user_count', 'Number of users in the Redmine')
-    # -1 becouse it is anonymous
-    begin
-      data.observe User.count - 1
-    rescue
-      data.observe 0
-    end
-    data.to_prometheus_text
-  end
-
   def self.sessions_count()
     data = PrometheusExporter::Metric::Gauge.new('redmine_sessions_count', 'Number of sessions in the Redmine')
     # -1 becouse it is anonymous
@@ -34,25 +23,6 @@ module RedExporter::Redmine
     data.to_prometheus_text
   end
 
-  def self.redmine_all_issues_count()
-    data = PrometheusExporter::Metric::Gauge.new('redmine_all_issues_count', 'Count of all issues')
-    begin
-      data.observe Issue.count
-    rescue
-      data.observe 0
-    end
-    data.to_prometheus_text
-  end
-
-  def self.redmine_closed_issues_count()
-    data = PrometheusExporter::Metric::Gauge.new('redmine_closed_issues_count', 'Count of all closed issues')
-    begin
-      data.observe Issue.joins(:status).where('issue_statuses.is_closed = ?', true).count
-    rescue
-      data.observe 0
-    end
-    data.to_prometheus_text
-  end
 end
 
 

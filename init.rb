@@ -2,6 +2,10 @@ require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter_admin_menu
 require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/redexporter"
 require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/vmstat"
 require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/redmine"
+require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/ruby_vm"
+require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/projects_issues"
+require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/users"
+require_dependency "#{Rails.root}/plugins/redexporter/lib/redexporter/system"
 require_dependency "#{Rails.root}/plugins/redexporter/lib/application_controller_patch"
 
 ApplicationController.include ApplicationControllerPatch

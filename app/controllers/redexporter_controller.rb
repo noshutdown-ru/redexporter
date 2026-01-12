@@ -19,9 +19,22 @@ class RedexporterController < ApplicationController
     + RedExporter::Vmstat.cpu_usage \
     + RedExporter::Redmine.redmine_files_bytes \
     + RedExporter::Redmine.sessions_count \
-    + RedExporter::Redmine.user_count \
-    + RedExporter::Redmine.redmine_all_issues_count \
-    + RedExporter::Redmine.redmine_closed_issues_count
+    + RedExporter::RubyVM.ruby_process_memory_bytes \
+    + RedExporter::RubyVM.ruby_threads_count \
+    + RedExporter::RubyVM.ruby_gc_collections \
+    + RedExporter::RubyVM.ruby_heap_allocated_pages \
+    + RedExporter::RubyVM.ruby_heap_available_slots \
+    + RedExporter::RubyVM.ruby_live_objects \
+    + RedExporter::ProjectsIssues.projects_count \
+    + RedExporter::ProjectsIssues.issues_metrics \
+    + RedExporter::ProjectsIssues.time_tracked_total \
+    + RedExporter::ProjectsIssues.time_tracked_by_user \
+    + RedExporter::Users.users_metrics \
+    + RedExporter::System.average_request_latency \
+    + RedExporter::System.max_request_latency \
+    + RedExporter::System.request_count \
+    + RedExporter::System.rails_cache_stats \
+    + RedExporter::System.sidekiq_stats
 
     render plain: data
   end
